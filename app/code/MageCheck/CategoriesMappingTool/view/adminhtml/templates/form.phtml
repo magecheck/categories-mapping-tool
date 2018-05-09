@@ -1,0 +1,97 @@
+<?php
+$categories = $this->getCategoryList();
+$attributeInfo = $this->getProductAttributes(); 
+?>
+
+
+<form class="form" name="form_centric" action="<?php echo $this->getUrl('mapping/product/update') ?>" method="POST" id="form_centric" enctype="multipart/form-data">
+    <input name="form_key" type="hidden" value="<?php echo $this->getFormKey(); ?>">
+    <label for="category"><?php echo __('Select Category') ?></label>
+    <select name="category">
+        <?php foreach ($categories as $category) : ?>
+            <option value="<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></option>
+        <?php endforeach; ?>
+    </select>
+    <hr/>
+    <div class="notice"><?php echo __('Method  "Overwrite"  will set the new category to the product and remove any previous selections.') ?></div>
+    <div class="notice"><?php echo __('Method  "Append"  will add this category to previously selected categories.') ?></div>
+    <br/>
+    <label for="type"><?php echo __('Select Method Type') ?></label>
+    <select name="type">
+        <option value="0"><?php echo __('Append') ?></option>
+        <option value="1"><?php echo __('Overwrite') ?></option>
+    </select>
+    <hr/>
+    <label for="attribute"><?php echo __('Select product attribute') ?></label>
+    <select name="attribute" class="attribute">
+        <?php foreach ($attributeInfo as $attribute) : ?>
+            <option value="<?php echo $attribute->getId(); ?>"><?php echo $attribute->getFrontendLabel(); ?></option>
+        <?php endforeach; ?>
+    </select>
+    <button id="form-add" type="button"><?php echo __('Add filter') ?></button>
+    <hr/>
+    <div class="attribute-filtering"></div>
+    <button id="form-check" type="button" disabled="true"><?php echo __('Check') ?></button>
+    <input type="hidden" class="validation" value="1"/>
+    <br/>
+    <div class="error-messages"></div>
+    <br/>
+    <h2><?php echo __('Product list according to filtering') ?></h2>
+    <table class="data-grid">
+        <thead>
+            <tr>
+                <th class="data-grid-th"><?php echo __('Id') ?></th>
+                <th class="data-grid-th"><?php echo __('Sku') ?></th>
+                <th class="data-grid-th"><?php echo __('Image') ?></th>
+                <th class="data-grid-th"><?php echo __('Type') ?></th>
+                <th class="data-grid-th"><?php echo __('Attribute Set') ?></th>
+                <th class="data-grid-th"><?php echo __('Name') ?></th>
+                <th class="data-grid-th"><?php echo __('Enabled') ?></th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</form>
+
+<script type="text/javascript">
+    require(['jquery','domReady!'],function($)
+    {
+        $(document.body).on('click', '#form-add', function() {
+            $.ajax({
+                url: "<?php echo $this->getUrl('mapping/product/filter') ?>",
+                data: $('#form_centric').serialize(),
+                type: 'POST',
+                dataType: 'html',
+                success: function (data, status, xhr) {
+                    $(".attribute-filtering").append(data);
+                    if($('#form-check').is(":disabled")){
+                        $('#form-check').prop('disabled',false)
+                    }
+                }
+            });
+            $('#form_centric .attribute option:selected').remove();
+        });
+        $(document.body).on('click', '#form-check', function() {
+            $.ajax({
+                url: "<?php echo $this->getUrl('mapping/product/check') ?>",
+                data: $('#form_centric').serialize(),
+                type: 'POST',
+                dataType: 'json',
+                success: function (data, status, xhr) {
+                    if(!data.success){
+                        $('button#update').attr('class','action-default scalable disabled save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only');
+                        $('#form_centric .error-messages').html(data.message).show();
+                        $('#form_centric .data-grid tbody').html('');
+                    }else{
+                        $('button#update').attr('class','action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only');
+                        $('#form_centric .error-messages').html('').hide();
+                        $('#form_centric .data-grid tbody').html(data.message);
+                     }
+                }
+            });
+        });
+        $(document.body).on('click', 'button#update', function() {
+            $('#form_centric').submit();
+        });
+    });
+</script>

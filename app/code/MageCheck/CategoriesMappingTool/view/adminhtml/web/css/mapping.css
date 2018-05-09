@@ -1,0 +1,7 @@
+#form_centric label{display:inline-block;min-width:200px}
+#form_centric .notice{color:green}
+#form_centric #form-check{background-color:green;color:#fff;line-height:1em;margin-top:20px}
+#form_centric #form-add{margin-left:20px;background-color:#DAA520;color:#fff;line-height:1em}
+#form_centric .attribute-filtering{padding:20px;border:2px solid green}
+#form_centric .attribute-filtering .no-options{color:green}
+#form_centric .error-messages{background:red;color:#fff;padding:5px;margin-top:10px;font-weight:700;display:none}
