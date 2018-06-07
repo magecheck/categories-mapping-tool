@@ -17,7 +17,7 @@ $attributeInfo = $this->getProductAttributes(); ?>
 <form class="form" name="form_centric" action="<?php echo $this->getUrl('mapping/product/update') ?>" method="POST" id="form_centric" enctype="multipart/form-data">
     <input name="form_key" type="hidden" value="<?php echo $this->getFormKey(); ?>">
     <label for="category"><?php echo __('Select Category') ?></label>
-    <select name="category">
+    <select name="category" class="admin__control-select">
         <?php
         foreach ($categories as $category):
             $separator = ">";
@@ -38,13 +38,13 @@ $attributeInfo = $this->getProductAttributes(); ?>
     <div class="notice"><?php echo __('Method  "Append"  will add this category to previously selected categories.') ?></div>
     <br/>
     <label for="type"><?php echo __('Select Method Type') ?></label>
-    <select name="type">
+    <select name="type" class="admin__control-select">
         <option value="0"><?php echo __('Append') ?></option>
         <option value="1"><?php echo __('Overwrite') ?></option>
     </select>
     <hr/>
     <label for="attribute"><?php echo __('Select product attribute') ?></label>
-    <select name="attribute" class="attribute">
+    <select name="attribute" class="attribute admin__control-select">
         <?php foreach ($attributeInfo as $attribute) : ?>
             <option value="<?php echo $attribute->getId(); ?>"><?php echo $attribute->getFrontendLabel(); ?></option>
         <?php endforeach; ?>
