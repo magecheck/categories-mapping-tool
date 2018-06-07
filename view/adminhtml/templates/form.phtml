@@ -18,8 +18,19 @@ $attributeInfo = $this->getProductAttributes(); ?>
     <input name="form_key" type="hidden" value="<?php echo $this->getFormKey(); ?>">
     <label for="category"><?php echo __('Select Category') ?></label>
     <select name="category">
-        <?php foreach ($categories as $category) : ?>
-            <option value="<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></option>
+        <?php
+        foreach ($categories as $category):
+            $separator = ">";
+            $name = $category->getName();
+            $parentCat = $category->getParentCategory();
+            if($parentCat):
+                while($parentCat && $parentCat->getLevel() > 1){
+                    $name = $parentCat->getName() . ' '.$separator.' ' . $name;
+                    $parentCat = $parentCat->getParentCategory();
+                    $separator .= ">";
+                }
+            endif; ?>
+            <option value="<?php echo $category->getId(); ?>"><?php echo $name; ?> (<?php echo $category->getId(); ?>)</option>
         <?php endforeach; ?>
     </select>
     <hr/>
@@ -102,6 +113,9 @@ $attributeInfo = $this->getProductAttributes(); ?>
         });
         $(document.body).on('click', 'button#update', function() {
             $('#form_centric').submit();
+        });
+        $(document.body).on('click', '[data-remove-filter]', function () {
+            $(this).closest('[data-filter]').remove();
         });
     });
 </script>
