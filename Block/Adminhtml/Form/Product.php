@@ -2,10 +2,10 @@
 
 /**
  * MageCheck
- * CategoriesMappingTool Sync Extension
+ * Magento 2 Categories Mapping Tool
  *
- * @author Chiriac Victor && Cristian Gribincea
- * @since 03.2018
+ * @author Chiriac Victor
+ * @since 06.2018
  * @category   MageCheck
  * @package    MageCheck_CategoriesMappingTool
  * @copyright  Copyright (c) 2017 Mage Check (http://www.magecheck.com/)
@@ -112,11 +112,12 @@ class Product extends \Magento\Backend\Block\Widget\Form\Container
      */
     public function getCategoryList()
     {
-        return $this->_categoryCollectionFactory->create()
-                                                                        ->addAttributeToSelect('*')
-                                                                        ->addAttributeToFilter('is_active', 1)
-                                                                        ->addAttributeToFilter('level', array('gt' => 1))
-                                                                        ->setOrder('position', 'ASC');
+        return $this->_categoryCollectionFactory
+                    ->create()
+                    ->addAttributeToSelect('*')
+                    ->addAttributeToFilter('is_active', 1)
+                    ->addAttributeToFilter('level', array('gt' => 1))
+                    ->setOrder('name', 'ASC');
     }
 
     /** Get Product Attributes
@@ -124,9 +125,10 @@ class Product extends \Magento\Backend\Block\Widget\Form\Container
      */
     public function getProductAttributes()
     {
-        return $this->_attributeFactory->getCollection()
-                                                         ->addFieldToFilter(\Magento\Eav\Model\Entity\Attribute\Set::KEY_ENTITY_TYPE_ID, 4)
-                                                         ->addFieldToFilter('attribute_code', array('nin' => $this->getIgnoredAttributes()));
+        return $this->_attributeFactory
+                    ->getCollection()
+                    ->addFieldToFilter(\Magento\Eav\Model\Entity\Attribute\Set::KEY_ENTITY_TYPE_ID, 4)
+                    ->addFieldToFilter('attribute_code', array('nin' => $this->getIgnoredAttributes()));
     }
     
     /** Get Ignored Attributes
@@ -134,20 +136,63 @@ class Product extends \Magento\Backend\Block\Widget\Form\Container
      */
     public function getIgnoredAttributes()
     {
-        return array(
-            "backcover", "category_ids", "cost", "created_at", "custom_design", 
-            "custom_design_from", "custom_design_to", "custom_layout", "custom_layout_update",
-            "description", "gallery", "gift_message_available", "has_options", 
-            "image", "image_label", "links_exist", "links_purchased_separately", 
-            "links_title", "media_gallery", "meta_description", "meta_keyword",
-            "meta_title", "minimal_price", "msrp", "msrp_display_actual_price_type",
-            "news_from_date", "news_to_date", "old_id", "options_container", 
-            "page_layout", "price", "price_type", "price_view", "quantity_and_stock_status",
-            "required_options", "samples_title", "shipment_type", "short_description",
-            "sku_type", "small_image", "small_image_label","special_from_date", 
-            "special_price", "special_to_date", "status", "swatch_image", "tax_class_id",
-            "thumbnail", "thumbnail_label", "tier_price", "updated_at", "url_key",
-            "url_path", "weight_type", "visibility", "order"
-        );
+        return [
+            "backcover",
+            "category_ids",
+            "cost",
+            "created_at",
+            "custom_design",
+            "custom_design_from",
+            "custom_design_to",
+            "custom_layout",
+            "custom_layout_update",
+            "description",
+            "gallery",
+            "gift_message_available",
+            "has_options",
+            "image",
+            "image_label",
+            "links_exist",
+            "links_purchased_separately",
+            "links_title",
+            "media_gallery",
+            "meta_description",
+            "meta_keyword",
+            "meta_title",
+            "minimal_price",
+            "msrp",
+            "msrp_display_actual_price_type",
+            "news_from_date",
+            "news_to_date",
+            "old_id",
+            "options_container",
+            "page_layout",
+            "price",
+            "price_type",
+            "price_view",
+            "quantity_and_stock_status",
+            "required_options",
+            "samples_title",
+            "shipment_type",
+            "short_description",
+            "sku_type",
+            "small_image",
+            "small_image_label",
+            "special_from_date",
+            "special_price",
+            "special_to_date",
+            "status",
+            "swatch_image",
+            "tax_class_id",
+            "thumbnail",
+            "thumbnail_label",
+            "tier_price",
+            "updated_at",
+            "url_key",
+            "url_path",
+            "weight_type",
+            "visibility",
+            "order"
+        ];
     }
 }

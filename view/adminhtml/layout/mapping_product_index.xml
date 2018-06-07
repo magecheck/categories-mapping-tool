@@ -1,4 +1,16 @@
 <?xml version="1.0"?>
+<!--
+/**
+ * MageCheck
+ * Magento 2 Categories Mapping Tool
+ *
+ * @author Chiriac Victor
+ * @since 06.2018
+ * @category   MageCheck
+ * @package    MageCheck_CategoriesMappingTool
+ * @copyright  Copyright (c) 2017 Mage Check (http://www.magecheck.com/)
+ */
+-->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
         <title>Category Products Mapping Tool</title>

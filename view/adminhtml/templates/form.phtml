@@ -1,8 +1,18 @@
 <?php
-$categories = $this->getCategoryList();
-$attributeInfo = $this->getProductAttributes(); 
-?>
 
+/**
+ * MageCheck
+ * Magento 2 Categories Mapping Tool
+ *
+ * @author Chiriac Victor
+ * @since 06.2018
+ * @category   MageCheck
+ * @package    MageCheck_CategoriesMappingTool
+ * @copyright  Copyright (c) 2017 Mage Check (http://www.magecheck.com/)
+ */
+
+$categories = $this->getCategoryList();
+$attributeInfo = $this->getProductAttributes(); ?>
 
 <form class="form" name="form_centric" action="<?php echo $this->getUrl('mapping/product/update') ?>" method="POST" id="form_centric" enctype="multipart/form-data">
     <input name="form_key" type="hidden" value="<?php echo $this->getFormKey(); ?>">

@@ -2,10 +2,10 @@
 
 /**
  * MageCheck
- * CategoriesMappingTool Sync Extension
+ * Magento 2 Categories Mapping Tool
  *
- * @author Chiriac Victor && Cristian Gribincea
- * @since 03.2018
+ * @author Chiriac Victor
+ * @since 06.2018
  * @category   MageCheck
  * @package    MageCheck_CategoriesMappingTool
  * @copyright  Copyright (c) 2017 Mage Check (http://www.magecheck.com/)
@@ -25,8 +25,6 @@ class Filter extends \Magento\Backend\App\Action
      */
     protected $tableFactory;
     
-    
-
     /** Constructor
      * @param \Magento\Backend\App\Action\Context $context
      * @param \Magento\Eav\Model\Entity\Attribute\Source\TableFactory $tableFactory
