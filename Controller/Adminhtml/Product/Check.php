@@ -131,14 +131,14 @@ class Check extends \Magento\Backend\App\Action
         foreach ($this->_productCollection as $p) {
             $product = $this->_product->load($p->getId());
             $output .= '<tr class="data-row '.( $count%2 == 0 ? '_odd-row' : '' ).'">'
-                                . '<td>'.$product->getId().'</td>'
-                                . '<td>'.$product->getSku().'</td>'
-                                . '<td class="data-grid-thumbnail-cell"><img class="admin__control-thumbnail" src="/pub/media/catalog/product'.$product->getThumbnail().'" alt="'.$product->getName().'" /></td>'
-                                . '<td>'.$product->getTypeId().'</td>'
-                                . '<td>'.$this->_attributeSet->get($product->getAttributeSetId())->getAttributeSetName().'</td>'
-                                . '<td>'.$product->getName().'</td>'
-                                . '<td>'.($product->getStatus() ? __('Yes') : __('No') ).'</td>'
-                            . '<tr>';
+                            . '<td>'.$product->getId().'</td>'
+                            . '<td>'.$product->getSku().'</td>'
+                            . '<td class="data-grid-thumbnail-cell"><img class="admin__control-thumbnail" src="/pub/media/catalog/product'.$product->getThumbnail().'" alt="'.$product->getName().'" /></td>'
+                            . '<td>'.$product->getTypeId().'</td>'
+                            . '<td>'.$this->_attributeSet->get($product->getAttributeSetId())->getAttributeSetName().'</td>'
+                            . '<td>'.$product->getName().'</td>'
+                            . '<td>'.($product->getStatus() ? __('Yes') : __('No') ).'</td>'
+                     . '<tr>';
             $count++;
         }
         return $output;
