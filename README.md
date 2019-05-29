@@ -19,9 +19,11 @@ Installation with composer
 -------
 
     composer require magecheck/categories-mapping-tool
+    composer install
     php bin/magento setup:upgrade
+    php bin/magento setup:di:compile
+    php bin/magento setup:static-content:deploy en_US
     php bin/magento cache:flush
-    php bin/magento cache:clean
 
 Now you are set to go!
 
